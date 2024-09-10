@@ -8,23 +8,29 @@
 <script setup>
 import {  ref, onMounted  } from 'vue'
 import { Qalendar } from "qalendar";
-const eventos = ref([{
-    title: "SEBASTIAN",
-    time: { start: "2024-09-16", end: "2024-09-16" },
-    color: "blue",
-    isEditable: true,
-    id: "753944708f0f",
-    description: "SEBASTIAN"
+const personas = [
+  {
+    name:"Sebastian",
+    color: "green",
   },
   {
-    title: "Ralph on holiday",
-    with: "Rachel Greene",
-    time: { start: "2022-05-10", end: "2022-05-22" },
-    color: "green",
-    isEditable: true,
-    id: "5602b6f589fc"
-  }
-]);
+    name:"Fabio",
+    color: "blue",
+  },
+  {
+    name:"Cristian",
+    color: "red",
+  },
+  {
+    name:"Sergio",
+    color: "yellow",
+  },
+  {
+    name:"Ray",
+    color: "pink",
+  },
+]
+const eventos = ref([]);
 const config = {
   locale: "es-ES",
   defaultMode: "month"
@@ -32,6 +38,7 @@ const config = {
 const generarTurnos = () => {
     const turnos = [];
     let fecha = new Date(2024, 8, 1);
+    let contador = 0;
     while (fecha.getMonth() === 8) {
       if (fecha.getDay() === 0) {
         fecha.setDate(fecha.getDate() + 1);
@@ -43,17 +50,19 @@ const generarTurnos = () => {
         const fechaFormateada = `${año}-${mes}-${día}`;
         turnos.push(
           {
-            title: "SEBASTIAN",
+            title: personas[contador].name,
             time: { start: fechaFormateada, end:fechaFormateada },
-            color: "blue",
-            isEditable: true,
+            color: personas[contador].color,
             id: get_uuidv4(),
-            description: "SEBASTIAN"
           }
         );
         
-      const dias_a_sumar = fecha.getDay() > 3 ? 5:4;
-      fecha.setDate(fecha.getDate() + dias_a_sumar);
+      fecha.setDate(fecha.getDate() + 1);
+      if (contador === personas.length - 1) {
+        contador = 0;
+      }else{
+        contador++;
+      }
     }
 
     return turnos;

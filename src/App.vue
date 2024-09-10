@@ -1,10 +1,7 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
-  <HelloWorld />
-
-  <RouterView />
+  <HelloWorld style="width: 80vw;" />
 </template>
